@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 /// {@template initialization_processor}
@@ -10,6 +9,9 @@ abstract class AppColors {
   static const whitePurple = Color(0xFFf8ecfe);
   static const white = Color(0xFFFFFFFF);
   static const purple = Color(0xFF9838bb);
+  static const lightPurple = Color(0xFFa75ac4);
   static const lowPurple = Color(0xFFa04ac1);
   static const green = Color(0xFF41823f);
+  static const orange = Color(0xFFc26226);
+  static const red = Color(0xFFe74c45);
 }
