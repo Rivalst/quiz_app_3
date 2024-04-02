@@ -20,24 +20,25 @@ mixin _$QuizScoreState {
   int get correctAnswers => throw _privateConstructorUsedError;
   int get incorrectAnswers => throw _privateConstructorUsedError;
   int get currentQuizIndex => throw _privateConstructorUsedError;
+  bool get isButtonsOff => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int score, int correctAnswers,
-            int incorrectAnswers, int currentQuizIndex)
+            int incorrectAnswers, int currentQuizIndex, bool isButtonsOff)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int score, int correctAnswers, int incorrectAnswers,
-            int currentQuizIndex)?
+            int currentQuizIndex, bool isButtonsOff)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int score, int correctAnswers, int incorrectAnswers,
-            int currentQuizIndex)?
+            int currentQuizIndex, bool isButtonsOff)?
         initial,
     required TResult orElse(),
   }) =>
@@ -74,7 +75,8 @@ abstract class $QuizScoreStateCopyWith<$Res> {
       {int score,
       int correctAnswers,
       int incorrectAnswers,
-      int currentQuizIndex});
+      int currentQuizIndex,
+      bool isButtonsOff});
 }
 
 /// @nodoc
@@ -94,6 +96,7 @@ class _$QuizScoreStateCopyWithImpl<$Res, $Val extends QuizScoreState>
     Object? correctAnswers = null,
     Object? incorrectAnswers = null,
     Object? currentQuizIndex = null,
+    Object? isButtonsOff = null,
   }) {
     return _then(_value.copyWith(
       score: null == score
@@ -112,6 +115,10 @@ class _$QuizScoreStateCopyWithImpl<$Res, $Val extends QuizScoreState>
           ? _value.currentQuizIndex
           : currentQuizIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isButtonsOff: null == isButtonsOff
+          ? _value.isButtonsOff
+          : isButtonsOff // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -128,7 +135,8 @@ abstract class _$$$InitialScoreStateImplCopyWith<$Res>
       {int score,
       int correctAnswers,
       int incorrectAnswers,
-      int currentQuizIndex});
+      int currentQuizIndex,
+      bool isButtonsOff});
 }
 
 /// @nodoc
@@ -146,6 +154,7 @@ class __$$$InitialScoreStateImplCopyWithImpl<$Res>
     Object? correctAnswers = null,
     Object? incorrectAnswers = null,
     Object? currentQuizIndex = null,
+    Object? isButtonsOff = null,
   }) {
     return _then(_$$InitialScoreStateImpl(
       score: null == score
@@ -164,6 +173,10 @@ class __$$$InitialScoreStateImplCopyWithImpl<$Res>
           ? _value.currentQuizIndex
           : currentQuizIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isButtonsOff: null == isButtonsOff
+          ? _value.isButtonsOff
+          : isButtonsOff // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -175,7 +188,8 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
       {this.score = 0,
       this.correctAnswers = 0,
       this.incorrectAnswers = 0,
-      this.currentQuizIndex = 0})
+      this.currentQuizIndex = 0,
+      this.isButtonsOff = false})
       : super._();
 
   @override
@@ -190,10 +204,13 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
   @override
   @JsonKey()
   final int currentQuizIndex;
+  @override
+  @JsonKey()
+  final bool isButtonsOff;
 
   @override
   String toString() {
-    return 'QuizScoreState.initial(score: $score, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, currentQuizIndex: $currentQuizIndex)';
+    return 'QuizScoreState.initial(score: $score, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, currentQuizIndex: $currentQuizIndex, isButtonsOff: $isButtonsOff)';
   }
 
   @override
@@ -207,12 +224,14 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
             (identical(other.incorrectAnswers, incorrectAnswers) ||
                 other.incorrectAnswers == incorrectAnswers) &&
             (identical(other.currentQuizIndex, currentQuizIndex) ||
-                other.currentQuizIndex == currentQuizIndex));
+                other.currentQuizIndex == currentQuizIndex) &&
+            (identical(other.isButtonsOff, isButtonsOff) ||
+                other.isButtonsOff == isButtonsOff));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, score, correctAnswers, incorrectAnswers, currentQuizIndex);
+  int get hashCode => Object.hash(runtimeType, score, correctAnswers,
+      incorrectAnswers, currentQuizIndex, isButtonsOff);
 
   @JsonKey(ignore: true)
   @override
@@ -225,33 +244,35 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int score, int correctAnswers,
-            int incorrectAnswers, int currentQuizIndex)
+            int incorrectAnswers, int currentQuizIndex, bool isButtonsOff)
         initial,
   }) {
-    return initial(score, correctAnswers, incorrectAnswers, currentQuizIndex);
+    return initial(score, correctAnswers, incorrectAnswers, currentQuizIndex,
+        isButtonsOff);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int score, int correctAnswers, int incorrectAnswers,
-            int currentQuizIndex)?
+            int currentQuizIndex, bool isButtonsOff)?
         initial,
   }) {
-    return initial?.call(
-        score, correctAnswers, incorrectAnswers, currentQuizIndex);
+    return initial?.call(score, correctAnswers, incorrectAnswers,
+        currentQuizIndex, isButtonsOff);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int score, int correctAnswers, int incorrectAnswers,
-            int currentQuizIndex)?
+            int currentQuizIndex, bool isButtonsOff)?
         initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(score, correctAnswers, incorrectAnswers, currentQuizIndex);
+      return initial(score, correctAnswers, incorrectAnswers, currentQuizIndex,
+          isButtonsOff);
     }
     return orElse();
   }
@@ -290,7 +311,8 @@ abstract class _$InitialScoreState extends QuizScoreState {
       {final int score,
       final int correctAnswers,
       final int incorrectAnswers,
-      final int currentQuizIndex}) = _$$InitialScoreStateImpl;
+      final int currentQuizIndex,
+      final bool isButtonsOff}) = _$$InitialScoreStateImpl;
   _$InitialScoreState._() : super._();
 
   @override
@@ -302,6 +324,8 @@ abstract class _$InitialScoreState extends QuizScoreState {
   @override
   int get currentQuizIndex;
   @override
+  bool get isButtonsOff;
+  @override
   @JsonKey(ignore: true)
   _$$$InitialScoreStateImplCopyWith<_$$InitialScoreStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -309,43 +333,44 @@ abstract class _$InitialScoreState extends QuizScoreState {
 
 /// @nodoc
 mixin _$QuizScoreEvent {
-  int get score => throw _privateConstructorUsedError;
-  bool get isCorrectAnswer => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int score, bool isCorrectAnswer) increment,
+    required TResult Function(bool isButtonsOff) buttonsStatusChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int score, bool isCorrectAnswer)? increment,
+    TResult? Function(bool isButtonsOff)? buttonsStatusChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int score, bool isCorrectAnswer)? increment,
+    TResult Function(bool isButtonsOff)? buttonsStatusChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IncrementScoreEvent value) increment,
+    required TResult Function(_ChangeButtonsStatusEvent value)
+        buttonsStatusChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IncrementScoreEvent value)? increment,
+    TResult? Function(_ChangeButtonsStatusEvent value)? buttonsStatusChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IncrementScoreEvent value)? increment,
+    TResult Function(_ChangeButtonsStatusEvent value)? buttonsStatusChange,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $QuizScoreEventCopyWith<QuizScoreEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -354,8 +379,6 @@ abstract class $QuizScoreEventCopyWith<$Res> {
   factory $QuizScoreEventCopyWith(
           QuizScoreEvent value, $Res Function(QuizScoreEvent) then) =
       _$QuizScoreEventCopyWithImpl<$Res, QuizScoreEvent>;
-  @useResult
-  $Res call({int score, bool isCorrectAnswer});
 }
 
 /// @nodoc
@@ -367,33 +390,13 @@ class _$QuizScoreEventCopyWithImpl<$Res, $Val extends QuizScoreEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? score = null,
-    Object? isCorrectAnswer = null,
-  }) {
-    return _then(_value.copyWith(
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCorrectAnswer: null == isCorrectAnswer
-          ? _value.isCorrectAnswer
-          : isCorrectAnswer // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$IncrementScoreEventImplCopyWith<$Res>
-    implements $QuizScoreEventCopyWith<$Res> {
+abstract class _$$IncrementScoreEventImplCopyWith<$Res> {
   factory _$$IncrementScoreEventImplCopyWith(_$IncrementScoreEventImpl value,
           $Res Function(_$IncrementScoreEventImpl) then) =
       __$$IncrementScoreEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int score, bool isCorrectAnswer});
 }
@@ -467,6 +470,7 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int score, bool isCorrectAnswer) increment,
+    required TResult Function(bool isButtonsOff) buttonsStatusChange,
   }) {
     return increment(score, isCorrectAnswer);
   }
@@ -475,6 +479,7 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int score, bool isCorrectAnswer)? increment,
+    TResult? Function(bool isButtonsOff)? buttonsStatusChange,
   }) {
     return increment?.call(score, isCorrectAnswer);
   }
@@ -483,6 +488,7 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int score, bool isCorrectAnswer)? increment,
+    TResult Function(bool isButtonsOff)? buttonsStatusChange,
     required TResult orElse(),
   }) {
     if (increment != null) {
@@ -495,6 +501,8 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IncrementScoreEvent value) increment,
+    required TResult Function(_ChangeButtonsStatusEvent value)
+        buttonsStatusChange,
   }) {
     return increment(this);
   }
@@ -503,6 +511,7 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IncrementScoreEvent value)? increment,
+    TResult? Function(_ChangeButtonsStatusEvent value)? buttonsStatusChange,
   }) {
     return increment?.call(this);
   }
@@ -511,6 +520,7 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IncrementScoreEvent value)? increment,
+    TResult Function(_ChangeButtonsStatusEvent value)? buttonsStatusChange,
     required TResult orElse(),
   }) {
     if (increment != null) {
@@ -525,12 +535,149 @@ abstract class _IncrementScoreEvent implements QuizScoreEvent {
       {final int score,
       final bool isCorrectAnswer}) = _$IncrementScoreEventImpl;
 
-  @override
   int get score;
-  @override
   bool get isCorrectAnswer;
-  @override
   @JsonKey(ignore: true)
   _$$IncrementScoreEventImplCopyWith<_$IncrementScoreEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeButtonsStatusEventImplCopyWith<$Res> {
+  factory _$$ChangeButtonsStatusEventImplCopyWith(
+          _$ChangeButtonsStatusEventImpl value,
+          $Res Function(_$ChangeButtonsStatusEventImpl) then) =
+      __$$ChangeButtonsStatusEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isButtonsOff});
+}
+
+/// @nodoc
+class __$$ChangeButtonsStatusEventImplCopyWithImpl<$Res>
+    extends _$QuizScoreEventCopyWithImpl<$Res, _$ChangeButtonsStatusEventImpl>
+    implements _$$ChangeButtonsStatusEventImplCopyWith<$Res> {
+  __$$ChangeButtonsStatusEventImplCopyWithImpl(
+      _$ChangeButtonsStatusEventImpl _value,
+      $Res Function(_$ChangeButtonsStatusEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isButtonsOff = null,
+  }) {
+    return _then(_$ChangeButtonsStatusEventImpl(
+      isButtonsOff: null == isButtonsOff
+          ? _value.isButtonsOff
+          : isButtonsOff // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeButtonsStatusEventImpl implements _ChangeButtonsStatusEvent {
+  const _$ChangeButtonsStatusEventImpl({this.isButtonsOff = false});
+
+  @override
+  @JsonKey()
+  final bool isButtonsOff;
+
+  @override
+  String toString() {
+    return 'QuizScoreEvent.buttonsStatusChange(isButtonsOff: $isButtonsOff)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeButtonsStatusEventImpl &&
+            (identical(other.isButtonsOff, isButtonsOff) ||
+                other.isButtonsOff == isButtonsOff));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isButtonsOff);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeButtonsStatusEventImplCopyWith<_$ChangeButtonsStatusEventImpl>
+      get copyWith => __$$ChangeButtonsStatusEventImplCopyWithImpl<
+          _$ChangeButtonsStatusEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int score, bool isCorrectAnswer) increment,
+    required TResult Function(bool isButtonsOff) buttonsStatusChange,
+  }) {
+    return buttonsStatusChange(isButtonsOff);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int score, bool isCorrectAnswer)? increment,
+    TResult? Function(bool isButtonsOff)? buttonsStatusChange,
+  }) {
+    return buttonsStatusChange?.call(isButtonsOff);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int score, bool isCorrectAnswer)? increment,
+    TResult Function(bool isButtonsOff)? buttonsStatusChange,
+    required TResult orElse(),
+  }) {
+    if (buttonsStatusChange != null) {
+      return buttonsStatusChange(isButtonsOff);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_IncrementScoreEvent value) increment,
+    required TResult Function(_ChangeButtonsStatusEvent value)
+        buttonsStatusChange,
+  }) {
+    return buttonsStatusChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_IncrementScoreEvent value)? increment,
+    TResult? Function(_ChangeButtonsStatusEvent value)? buttonsStatusChange,
+  }) {
+    return buttonsStatusChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_IncrementScoreEvent value)? increment,
+    TResult Function(_ChangeButtonsStatusEvent value)? buttonsStatusChange,
+    required TResult orElse(),
+  }) {
+    if (buttonsStatusChange != null) {
+      return buttonsStatusChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeButtonsStatusEvent implements QuizScoreEvent {
+  const factory _ChangeButtonsStatusEvent({final bool isButtonsOff}) =
+      _$ChangeButtonsStatusEventImpl;
+
+  bool get isButtonsOff;
+  @JsonKey(ignore: true)
+  _$$ChangeButtonsStatusEventImplCopyWith<_$ChangeButtonsStatusEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
