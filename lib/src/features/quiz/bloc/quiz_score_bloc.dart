@@ -7,28 +7,12 @@ part 'quiz_score_bloc.freezed.dart';
 class QuizScoreState with _$QuizScoreState {
   const QuizScoreState._();
 
-  (int score, int correctAnswers, int incorrectAnswers, int currentQuizIndex)
-      get count => when<
-              (
-                int score,
-                int correctAnswers,
-                int incorrectAnswers,
-                int currentQuizIndex
-              )>(
-            initial: (
-              score,
-              correctAnswers,
-              incorrectAnswers,
-              currentQuizIndex,
-            ) =>
-                (score, correctAnswers, incorrectAnswers, currentQuizIndex),
-          );
-
   factory QuizScoreState.initial({
     @Default(0) int score,
     @Default(0) int correctAnswers,
     @Default(0) int incorrectAnswers,
     @Default(0) int currentQuizIndex,
+    @Default(false) bool isButtonsOff,
   }) = _$InitialScoreState;
 }
 
@@ -38,32 +22,38 @@ class QuizScoreEvent with _$QuizScoreEvent {
     @Default(0) int score,
     @Default(false) bool isCorrectAnswer,
   }) = _IncrementScoreEvent;
+
+  const factory QuizScoreEvent.buttonsStatusChange({
+    @Default(false) bool isButtonsOff,
+  }) = _ChangeButtonsStatusEvent;
 }
 
 class QuizScoreBloc extends Bloc<QuizScoreEvent, QuizScoreState> {
   QuizScoreBloc() : super(QuizScoreState.initial()) {
     on<QuizScoreEvent>(
       (event, emitter) async {
-        await event.map(
-          increment: (event) async {
-            int correctAnswersIncrement = event.isCorrectAnswer ? 1 : 0;
-            int incorrectAnswersIncrement = event.isCorrectAnswer ? 0 : 1;
+        await event.map(increment: (event) async {
+          int correctAnswersIncrement = event.isCorrectAnswer ? 1 : 0;
+          int incorrectAnswersIncrement = event.isCorrectAnswer ? 0 : 1;
 
-            emitter(
-              state.copyWith(
-                score: state.score + event.score,
-                correctAnswers: state.correctAnswers + correctAnswersIncrement,
-                incorrectAnswers:
-                    state.incorrectAnswers + incorrectAnswersIncrement,
-              ),
-            );
-            await Future.delayed(const Duration(seconds: 3));
+          emitter(
+            state.copyWith(
+              score: state.score + event.score,
+              correctAnswers: state.correctAnswers + correctAnswersIncrement,
+              incorrectAnswers:
+                  state.incorrectAnswers + incorrectAnswersIncrement,
+            ),
+          );
+          await Future.delayed(const Duration(seconds: 3));
 
-            emitter(
-              state.copyWith(currentQuizIndex: state.currentQuizIndex + 1),
-            );
-          },
-        );
+          emitter(
+            state.copyWith(currentQuizIndex: state.currentQuizIndex + 1),
+          );
+        }, buttonsStatusChange: (event) {
+          emitter(
+            state.copyWith(isButtonsOff: event.isButtonsOff),
+          );
+        });
       },
     );
   }

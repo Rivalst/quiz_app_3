@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app_3/src/core/util/theme.dart';
 import 'package:quiz_app_3/src/features/app/model/quiz_model/quiz_model.dart';
+import 'package:quiz_app_3/src/features/quiz/bloc/quiz_score_bloc.dart';
 
 class Buttons extends StatefulWidget {
   final Quiz quiz;
-  final bool buttonOff;
 
   final Function({
     required int score,
     required bool isCorrect,
   }) selectedAnswer;
 
-  const Buttons(
-      {super.key,
-      required this.quiz,
-      required this.selectedAnswer,
-      required this.buttonOff});
+  const Buttons({
+    super.key,
+    required this.quiz,
+    required this.selectedAnswer,
+  });
 
   @override
   State<Buttons> createState() => _ButtonsState();
@@ -38,6 +39,7 @@ class _ButtonsState extends State<Buttons> {
 
   @override
   Widget build(BuildContext context) {
+    final isButtonOff = context.read<QuizScoreBloc>().state.isButtonsOff;
     return Padding(
       padding: const EdgeInsets.fromLTRB(40.0, 16.0, 40.0, 80.0),
       child: Column(
@@ -48,7 +50,7 @@ class _ButtonsState extends State<Buttons> {
               score: e.score,
               answered: _answered,
               isSelected: e.text == _selectedAnswer,
-              onPressed: !widget.buttonOff
+              onPressed: !isButtonOff
                   ? () {
                       final isCorrect = e.score > 0;
 

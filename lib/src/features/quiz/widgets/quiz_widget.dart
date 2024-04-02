@@ -24,9 +24,8 @@ class _QuizCardState extends State<QuizCard> {
   void initState() {
     _quizzes = context.read<QuizBloc>().state.quizzes!;
     _quizzesLength = _quizzes.length;
-    _duration = 2;
+    _duration = 60;
     _controller = CountDownController();
-    _buttonOff = false;
     super.initState();
   }
 
@@ -37,9 +36,9 @@ class _QuizCardState extends State<QuizCard> {
         if (_controller.isPaused && state.currentQuizIndex > _index) {
           _controller.reset();
           _controller.start();
-          setState(() {
-            _buttonOff = false;
-          });
+          context.read<QuizScoreBloc>().add(
+                const QuizScoreEvent.buttonsStatusChange(isButtonsOff: true),
+              );
         }
       },
       builder: (context, state) {
@@ -98,7 +97,6 @@ class _QuizCardState extends State<QuizCard> {
                 bottom: 0,
                 child: Buttons(
                   quiz: _quizzes[_index],
-                  buttonOff: _buttonOff,
                   selectedAnswer: _selectedAnswer,
                 ),
               )
@@ -118,9 +116,9 @@ class _QuizCardState extends State<QuizCard> {
 
     _controller.pause();
 
-    setState(() {
-      _buttonOff = true;
-    });
+    scoreBloc.add(
+      const QuizScoreEvent.buttonsStatusChange(isButtonsOff: true),
+    );
 
     scoreBloc.add(
       QuizScoreEvent.increment(
@@ -150,5 +148,4 @@ class _QuizCardState extends State<QuizCard> {
   late final int _duration;
   late final CountDownController _controller;
   late int _index;
-  late bool _buttonOff;
 }
