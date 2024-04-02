@@ -50,7 +50,10 @@ class HalfCircleStack extends StatelessWidget {
                 child: ClipPath(
                   clipper: const CustomHalfCircleClip(radius: 45),
                   child: Container(
-                      width: 90, height: 45, color: AppColors.lowPurple),
+                    width: 90,
+                    height: 45,
+                    color: AppColors.lowPurple,
+                  ),
                 ),
               ),
             ),
@@ -62,7 +65,10 @@ class HalfCircleStack extends StatelessWidget {
                 child: ClipPath(
                   clipper: const CustomHalfCircleClip(radius: 50),
                   child: Container(
-                      width: 100, height: 50, color: AppColors.lowPurple),
+                    width: 100,
+                    height: 50,
+                    color: AppColors.lowPurple,
+                  ),
                 ),
               ),
             ),
@@ -74,7 +80,9 @@ class HalfCircleStack extends StatelessWidget {
                 width: 40,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.lowPurple),
+                    shape: BoxShape.circle,
+                    color: AppColors.lowPurple,
+                  ),
                 ),
               ),
             ),
