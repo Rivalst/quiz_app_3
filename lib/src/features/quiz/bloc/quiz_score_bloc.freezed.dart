@@ -17,19 +17,28 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$QuizScoreState {
   int get score => throw _privateConstructorUsedError;
+  int get correctAnswers => throw _privateConstructorUsedError;
+  int get incorrectAnswers => throw _privateConstructorUsedError;
+  int get currentQuizIndex => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int score) initial,
+    required TResult Function(int score, int correctAnswers,
+            int incorrectAnswers, int currentQuizIndex)
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int score)? initial,
+    TResult? Function(int score, int correctAnswers, int incorrectAnswers,
+            int currentQuizIndex)?
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int score)? initial,
+    TResult Function(int score, int correctAnswers, int incorrectAnswers,
+            int currentQuizIndex)?
+        initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +70,11 @@ abstract class $QuizScoreStateCopyWith<$Res> {
           QuizScoreState value, $Res Function(QuizScoreState) then) =
       _$QuizScoreStateCopyWithImpl<$Res, QuizScoreState>;
   @useResult
-  $Res call({int score});
+  $Res call(
+      {int score,
+      int correctAnswers,
+      int incorrectAnswers,
+      int currentQuizIndex});
 }
 
 /// @nodoc
@@ -78,11 +91,26 @@ class _$QuizScoreStateCopyWithImpl<$Res, $Val extends QuizScoreState>
   @override
   $Res call({
     Object? score = null,
+    Object? correctAnswers = null,
+    Object? incorrectAnswers = null,
+    Object? currentQuizIndex = null,
   }) {
     return _then(_value.copyWith(
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      correctAnswers: null == correctAnswers
+          ? _value.correctAnswers
+          : correctAnswers // ignore: cast_nullable_to_non_nullable
+              as int,
+      incorrectAnswers: null == incorrectAnswers
+          ? _value.incorrectAnswers
+          : incorrectAnswers // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentQuizIndex: null == currentQuizIndex
+          ? _value.currentQuizIndex
+          : currentQuizIndex // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -96,7 +124,11 @@ abstract class _$$$InitialScoreStateImplCopyWith<$Res>
       __$$$InitialScoreStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int score});
+  $Res call(
+      {int score,
+      int correctAnswers,
+      int incorrectAnswers,
+      int currentQuizIndex});
 }
 
 /// @nodoc
@@ -111,11 +143,26 @@ class __$$$InitialScoreStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? score = null,
+    Object? correctAnswers = null,
+    Object? incorrectAnswers = null,
+    Object? currentQuizIndex = null,
   }) {
     return _then(_$$InitialScoreStateImpl(
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      correctAnswers: null == correctAnswers
+          ? _value.correctAnswers
+          : correctAnswers // ignore: cast_nullable_to_non_nullable
+              as int,
+      incorrectAnswers: null == incorrectAnswers
+          ? _value.incorrectAnswers
+          : incorrectAnswers // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentQuizIndex: null == currentQuizIndex
+          ? _value.currentQuizIndex
+          : currentQuizIndex // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -124,15 +171,29 @@ class __$$$InitialScoreStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$$InitialScoreStateImpl extends _$InitialScoreState {
-  _$$InitialScoreStateImpl({this.score = 0}) : super._();
+  _$$InitialScoreStateImpl(
+      {this.score = 0,
+      this.correctAnswers = 0,
+      this.incorrectAnswers = 0,
+      this.currentQuizIndex = 0})
+      : super._();
 
   @override
   @JsonKey()
   final int score;
+  @override
+  @JsonKey()
+  final int correctAnswers;
+  @override
+  @JsonKey()
+  final int incorrectAnswers;
+  @override
+  @JsonKey()
+  final int currentQuizIndex;
 
   @override
   String toString() {
-    return 'QuizScoreState.initial(score: $score)';
+    return 'QuizScoreState.initial(score: $score, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, currentQuizIndex: $currentQuizIndex)';
   }
 
   @override
@@ -140,11 +201,18 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$$InitialScoreStateImpl &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.correctAnswers, correctAnswers) ||
+                other.correctAnswers == correctAnswers) &&
+            (identical(other.incorrectAnswers, incorrectAnswers) ||
+                other.incorrectAnswers == incorrectAnswers) &&
+            (identical(other.currentQuizIndex, currentQuizIndex) ||
+                other.currentQuizIndex == currentQuizIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, score);
+  int get hashCode => Object.hash(
+      runtimeType, score, correctAnswers, incorrectAnswers, currentQuizIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -156,27 +224,34 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int score) initial,
+    required TResult Function(int score, int correctAnswers,
+            int incorrectAnswers, int currentQuizIndex)
+        initial,
   }) {
-    return initial(score);
+    return initial(score, correctAnswers, incorrectAnswers, currentQuizIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int score)? initial,
+    TResult? Function(int score, int correctAnswers, int incorrectAnswers,
+            int currentQuizIndex)?
+        initial,
   }) {
-    return initial?.call(score);
+    return initial?.call(
+        score, correctAnswers, incorrectAnswers, currentQuizIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int score)? initial,
+    TResult Function(int score, int correctAnswers, int incorrectAnswers,
+            int currentQuizIndex)?
+        initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(score);
+      return initial(score, correctAnswers, incorrectAnswers, currentQuizIndex);
     }
     return orElse();
   }
@@ -211,11 +286,21 @@ class _$$InitialScoreStateImpl extends _$InitialScoreState {
 }
 
 abstract class _$InitialScoreState extends QuizScoreState {
-  factory _$InitialScoreState({final int score}) = _$$InitialScoreStateImpl;
+  factory _$InitialScoreState(
+      {final int score,
+      final int correctAnswers,
+      final int incorrectAnswers,
+      final int currentQuizIndex}) = _$$InitialScoreStateImpl;
   _$InitialScoreState._() : super._();
 
   @override
   int get score;
+  @override
+  int get correctAnswers;
+  @override
+  int get incorrectAnswers;
+  @override
+  int get currentQuizIndex;
   @override
   @JsonKey(ignore: true)
   _$$$InitialScoreStateImplCopyWith<_$$InitialScoreStateImpl> get copyWith =>
@@ -225,19 +310,20 @@ abstract class _$InitialScoreState extends QuizScoreState {
 /// @nodoc
 mixin _$QuizScoreEvent {
   int get score => throw _privateConstructorUsedError;
+  bool get isCorrectAnswer => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int score) increment,
+    required TResult Function(int score, bool isCorrectAnswer) increment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int score)? increment,
+    TResult? Function(int score, bool isCorrectAnswer)? increment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int score)? increment,
+    TResult Function(int score, bool isCorrectAnswer)? increment,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -269,7 +355,7 @@ abstract class $QuizScoreEventCopyWith<$Res> {
           QuizScoreEvent value, $Res Function(QuizScoreEvent) then) =
       _$QuizScoreEventCopyWithImpl<$Res, QuizScoreEvent>;
   @useResult
-  $Res call({int score});
+  $Res call({int score, bool isCorrectAnswer});
 }
 
 /// @nodoc
@@ -286,12 +372,17 @@ class _$QuizScoreEventCopyWithImpl<$Res, $Val extends QuizScoreEvent>
   @override
   $Res call({
     Object? score = null,
+    Object? isCorrectAnswer = null,
   }) {
     return _then(_value.copyWith(
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
+      isCorrectAnswer: null == isCorrectAnswer
+          ? _value.isCorrectAnswer
+          : isCorrectAnswer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -304,7 +395,7 @@ abstract class _$$IncrementScoreEventImplCopyWith<$Res>
       __$$IncrementScoreEventImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int score});
+  $Res call({int score, bool isCorrectAnswer});
 }
 
 /// @nodoc
@@ -319,12 +410,17 @@ class __$$IncrementScoreEventImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? score = null,
+    Object? isCorrectAnswer = null,
   }) {
     return _then(_$IncrementScoreEventImpl(
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
+      isCorrectAnswer: null == isCorrectAnswer
+          ? _value.isCorrectAnswer
+          : isCorrectAnswer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -332,15 +428,19 @@ class __$$IncrementScoreEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
-  const _$IncrementScoreEventImpl({this.score = 0});
+  const _$IncrementScoreEventImpl(
+      {this.score = 0, this.isCorrectAnswer = false});
 
   @override
   @JsonKey()
   final int score;
+  @override
+  @JsonKey()
+  final bool isCorrectAnswer;
 
   @override
   String toString() {
-    return 'QuizScoreEvent.increment(score: $score)';
+    return 'QuizScoreEvent.increment(score: $score, isCorrectAnswer: $isCorrectAnswer)';
   }
 
   @override
@@ -348,11 +448,13 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IncrementScoreEventImpl &&
-            (identical(other.score, score) || other.score == score));
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.isCorrectAnswer, isCorrectAnswer) ||
+                other.isCorrectAnswer == isCorrectAnswer));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, score);
+  int get hashCode => Object.hash(runtimeType, score, isCorrectAnswer);
 
   @JsonKey(ignore: true)
   @override
@@ -364,27 +466,27 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int score) increment,
+    required TResult Function(int score, bool isCorrectAnswer) increment,
   }) {
-    return increment(score);
+    return increment(score, isCorrectAnswer);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int score)? increment,
+    TResult? Function(int score, bool isCorrectAnswer)? increment,
   }) {
-    return increment?.call(score);
+    return increment?.call(score, isCorrectAnswer);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int score)? increment,
+    TResult Function(int score, bool isCorrectAnswer)? increment,
     required TResult orElse(),
   }) {
     if (increment != null) {
-      return increment(score);
+      return increment(score, isCorrectAnswer);
     }
     return orElse();
   }
@@ -419,11 +521,14 @@ class _$IncrementScoreEventImpl implements _IncrementScoreEvent {
 }
 
 abstract class _IncrementScoreEvent implements QuizScoreEvent {
-  const factory _IncrementScoreEvent({final int score}) =
-      _$IncrementScoreEventImpl;
+  const factory _IncrementScoreEvent(
+      {final int score,
+      final bool isCorrectAnswer}) = _$IncrementScoreEventImpl;
 
   @override
   int get score;
+  @override
+  bool get isCorrectAnswer;
   @override
   @JsonKey(ignore: true)
   _$$IncrementScoreEventImplCopyWith<_$IncrementScoreEventImpl> get copyWith =>
