@@ -34,59 +34,68 @@ class HalfCircleStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 75,
-          child: RotatedBox(
-            quarterTurns: 45,
-            child: ClipPath(
-              clipper: const CustomHalfCircleClip(radius: 45),
-              child:
-                  Container(width: 90, height: 45, color: AppColors.lowPurple),
-            ),
-          ),
+    return SizedBox(
+      height: 250,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.0),
+          color: AppColors.purple,
         ),
-        Positioned(
-          top: 0,
-          left: 70,
-          child: RotatedBox(
-            quarterTurns: 90,
-            child: ClipPath(
-              clipper: const CustomHalfCircleClip(radius: 50),
-              child:
-                  Container(width: 100, height: 50, color: AppColors.lowPurple),
-            ),
-          ),
-        ),
-        const Positioned(
-          top: 30,
-          right: 100,
-          child: SizedBox(
-            height: 40,
-            width: 40,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color: AppColors.lowPurple),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 100,
-          right: 0,
-          child: RotatedBox(
-            quarterTurns: 135,
-            child: ClipPath(
-              clipper: const CustomHalfCircleClip(radius: 50),
-              child: Container(
-                width: 100,
-                height: 50,
-                color: AppColors.lowPurple,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 75,
+              child: RotatedBox(
+                quarterTurns: 45,
+                child: ClipPath(
+                  clipper: const CustomHalfCircleClip(radius: 45),
+                  child: Container(
+                      width: 90, height: 45, color: AppColors.lowPurple),
+                ),
               ),
             ),
-          ),
+            Positioned(
+              top: 0,
+              left: 70,
+              child: RotatedBox(
+                quarterTurns: 90,
+                child: ClipPath(
+                  clipper: const CustomHalfCircleClip(radius: 50),
+                  child: Container(
+                      width: 100, height: 50, color: AppColors.lowPurple),
+                ),
+              ),
+            ),
+            const Positioned(
+              top: 30,
+              right: 100,
+              child: SizedBox(
+                height: 40,
+                width: 40,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: AppColors.lowPurple),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 100,
+              right: 0,
+              child: RotatedBox(
+                quarterTurns: 135,
+                child: ClipPath(
+                  clipper: const CustomHalfCircleClip(radius: 50),
+                  child: Container(
+                    width: 100,
+                    height: 50,
+                    color: AppColors.lowPurple,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
