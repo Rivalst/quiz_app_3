@@ -37,7 +37,7 @@ class _QuizCardState extends State<QuizCard> {
           _controller.reset();
           _controller.start();
           context.read<QuizScoreBloc>().add(
-                const QuizScoreEvent.buttonsStatusChange(isButtonsOff: true),
+                const QuizScoreEvent.buttonsStatusChange(isButtonsOff: false),
               );
         }
       },
