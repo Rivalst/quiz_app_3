@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_3/src/core/util/theme.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -23,6 +24,7 @@ class SplashScreen extends StatelessWidget {
           ],
         ),
       ),
+      backgroundColor: AppColors.lightPurple,
     );
   }
 }

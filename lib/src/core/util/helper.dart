@@ -37,6 +37,15 @@ class QuizHelperOlympusOfZeusQuestions extends QuizHelper {
       ],
     },
     {
+      'questionText': 'What were Zeus\' brothers names.?',
+      'answers': [
+        {'text': 'Hephastus and Apollo', 'score': 0},
+        {'text': 'Hermes and Cronos', 'score': 0},
+        {'text': 'Poisiden And Hades', 'score': 100},
+        {'text': 'Hades and Ares', 'score': 0},
+      ],
+    },
+    {
       'questionText': 'Who is the protagonist of "Olympus of Zeus"?',
       'answers': [
         {'text': 'Perseus', 'score': 0},
