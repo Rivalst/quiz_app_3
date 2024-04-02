@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app_3/src/core/util/extensions.dart';
@@ -22,14 +23,22 @@ class _QuizCardState extends State<QuizCard> {
   void initState() {
     _quizzes = context.read<QuizBloc>().state.quizzes!;
     _quizzesLength = _quizzes.length;
+    _duration = 10;
+    _controller = CountDownController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<QuizScoreBloc, QuizScoreState>(
+    return BlocConsumer<QuizScoreBloc, QuizScoreState>(
+      listener: (context, state) {
+        if (_controller.isPaused && state.currentQuizIndex > _index) {
+          _controller.reset();
+          _controller.start();
+        }
+      },
       builder: (context, state) {
-        final index = state.currentQuizIndex;
+        _index = state.currentQuizIndex;
         return Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 15.0,
@@ -110,7 +119,7 @@ class _QuizCardState extends State<QuizCard> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5.0),
                             child: Text(
-                              _quizzes[index].questionText,
+                              _quizzes[_index].questionText,
                               textAlign: TextAlign.center,
                               style:
                                   const TextStyle(fontWeight: FontWeight.w600),
@@ -122,16 +131,37 @@ class _QuizCardState extends State<QuizCard> {
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 115,
                 left: 0,
                 right: 0,
                 child: SizedBox(
                   height: 80,
                   child: DecoratedBox(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircularCountDownTimer(
+                          width: 80,
+                          height: 80,
+                          duration: _duration,
+                          initialDuration: 0,
+                          isReverse: true,
+                          isReverseAnimation: true,
+                          fillColor: Colors.purple,
+                          ringColor: Colors.transparent,
+                          controller: _controller,
+                          onComplete: () {
+                            if (!_controller.isPaused) {
+                              _selectedAnswer(
+                                score: 0,
+                                isCorrect: false,
+                              );
+                            }
+                          }),
                     ),
                   ),
                 ),
@@ -141,7 +171,7 @@ class _QuizCardState extends State<QuizCard> {
                 right: 0,
                 bottom: 0,
                 child: Buttons(
-                  quiz: _quizzes[index],
+                  quiz: _quizzes[_index],
                   selectedAnswer: _selectedAnswer,
                 ),
               )
@@ -152,28 +182,41 @@ class _QuizCardState extends State<QuizCard> {
     );
   }
 
-  void _selectedAnswer({
+  Future<void> _selectedAnswer({
     required int score,
     required bool isCorrect,
-  }) {
+  }) async {
     final scoreBloc = context.read<QuizScoreBloc>();
     final currentIndex = scoreBloc.state.currentQuizIndex;
 
-    scoreBloc.add(
-        QuizScoreEvent.increment(score: score, isCorrectAnswer: isCorrect));
+    _controller.pause();
 
-    if (currentIndex >= _quizzes.length - 1) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            score: scoreBloc.state.score,
-          ),
-        ),
-      );
-      return;
-    }
+    scoreBloc.add(
+      QuizScoreEvent.increment(
+        score: score,
+        isCorrectAnswer: isCorrect,
+      ),
+    );
+
+    await Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        if (currentIndex >= _quizzes.length - 1) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ResultScreen(
+                score: scoreBloc.state.score,
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   late List<Quiz> _quizzes;
   late int _quizzesLength;
+  late final int _duration;
+  late final CountDownController _controller;
+  late int _index;
 }
