@@ -6,7 +6,7 @@ part 'quiz_option_model.g.dart';
 @freezed
 class QuizAnswer with _$QuizAnswer {
   const factory QuizAnswer({
-    required String answer,
+    required String text,
     required int score,
   }) = _QuizAnswer;
 
