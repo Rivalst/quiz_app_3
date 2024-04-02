@@ -8,12 +8,12 @@ part of 'quiz_option_model.dart';
 
 _$QuizAnswerImpl _$$QuizAnswerImplFromJson(Map<String, dynamic> json) =>
     _$QuizAnswerImpl(
-      answer: json['text'] as String,
+      text: json['text'] as String,
       score: json['score'] as int,
     );
 
 Map<String, dynamic> _$$QuizAnswerImplToJson(_$QuizAnswerImpl instance) =>
     <String, dynamic>{
-      'answer': instance.answer,
+      'text': instance.text,
       'score': instance.score,
     };

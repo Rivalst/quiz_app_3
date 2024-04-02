@@ -20,7 +20,7 @@ QuizAnswer _$QuizAnswerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$QuizAnswer {
-  String get answer => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $QuizAnswerCopyWith<$Res> {
           QuizAnswer value, $Res Function(QuizAnswer) then) =
       _$QuizAnswerCopyWithImpl<$Res, QuizAnswer>;
   @useResult
-  $Res call({String answer, int score});
+  $Res call({String text, int score});
 }
 
 /// @nodoc
@@ -51,13 +51,13 @@ class _$QuizAnswerCopyWithImpl<$Res, $Val extends QuizAnswer>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? answer = null,
+    Object? text = null,
     Object? score = null,
   }) {
     return _then(_value.copyWith(
-      answer: null == answer
-          ? _value.answer
-          : answer // ignore: cast_nullable_to_non_nullable
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
       score: null == score
           ? _value.score
@@ -75,7 +75,7 @@ abstract class _$$QuizAnswerImplCopyWith<$Res>
       __$$QuizAnswerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String answer, int score});
+  $Res call({String text, int score});
 }
 
 /// @nodoc
@@ -89,13 +89,13 @@ class __$$QuizAnswerImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? answer = null,
+    Object? text = null,
     Object? score = null,
   }) {
     return _then(_$QuizAnswerImpl(
-      answer: null == answer
-          ? _value.answer
-          : answer // ignore: cast_nullable_to_non_nullable
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
       score: null == score
           ? _value.score
@@ -108,19 +108,19 @@ class __$$QuizAnswerImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$QuizAnswerImpl implements _QuizAnswer {
-  const _$QuizAnswerImpl({required this.answer, required this.score});
+  const _$QuizAnswerImpl({required this.text, required this.score});
 
   factory _$QuizAnswerImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuizAnswerImplFromJson(json);
 
   @override
-  final String answer;
+  final String text;
   @override
   final int score;
 
   @override
   String toString() {
-    return 'QuizAnswer(answer: $answer, score: $score)';
+    return 'QuizAnswer(text: $text, score: $score)';
   }
 
   @override
@@ -128,13 +128,13 @@ class _$QuizAnswerImpl implements _QuizAnswer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuizAnswerImpl &&
-            (identical(other.answer, answer) || other.answer == answer) &&
+            (identical(other.text, text) || other.text == text) &&
             (identical(other.score, score) || other.score == score));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, answer, score);
+  int get hashCode => Object.hash(runtimeType, text, score);
 
   @JsonKey(ignore: true)
   @override
@@ -152,14 +152,14 @@ class _$QuizAnswerImpl implements _QuizAnswer {
 
 abstract class _QuizAnswer implements QuizAnswer {
   const factory _QuizAnswer(
-      {required final String answer,
+      {required final String text,
       required final int score}) = _$QuizAnswerImpl;
 
   factory _QuizAnswer.fromJson(Map<String, dynamic> json) =
       _$QuizAnswerImpl.fromJson;
 
   @override
-  String get answer;
+  String get text;
   @override
   int get score;
   @override
