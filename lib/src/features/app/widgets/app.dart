@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app_3/src/core/util/dependencies.dart';
+import 'package:quiz_app_3/src/core/widgets/root.dart';
 import 'package:quiz_app_3/src/features/app/bloc/quiz_bloc.dart';
 
 class App extends StatelessWidget {
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(useMaterial3: true),
-        home: const Row(),
+        home: const Root(),
       ),
     );
   }

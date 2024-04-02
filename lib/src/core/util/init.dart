@@ -12,7 +12,7 @@ final class InitializationProcessor {
   const InitializationProcessor();
 
   Future<Dependencies> _initDependencies() async {
-    final quizHelper = QuizHelperMysteryOfTiger();
+    final quizHelper = QuizHelperOlympusOfZeusQuestions();
     final quizData = QuizDataLocalProviderImpl(quizHelper: quizHelper);
     final quizRepository = QuizRepositoryImpl(quizDataProvider: quizData);
 

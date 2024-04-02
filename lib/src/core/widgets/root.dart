@@ -25,7 +25,7 @@ class Root extends StatelessWidget {
           return ColoredBox(
             color: Colors.red,
             child: Center(
-              child: Text(messages),
+              child: Text(messages, style: TextStyle(color: Colors.white),),
             ),
           );
         },

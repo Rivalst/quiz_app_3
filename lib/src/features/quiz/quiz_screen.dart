@@ -10,7 +10,10 @@ class QuizScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => QuizScoreBloc(),
       child: Scaffold(
-        appBar: AppBar(),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+        ),
         body: Placeholder(),
         backgroundColor: Colors.white,
       ),
