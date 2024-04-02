@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:quiz_app_3/src/core/util/extensions.dart';
 import 'package:quiz_app_3/src/core/util/theme.dart';
 import 'package:quiz_app_3/src/features/app/bloc/quiz_bloc.dart';
@@ -23,8 +24,9 @@ class _QuizCardState extends State<QuizCard> {
   void initState() {
     _quizzes = context.read<QuizBloc>().state.quizzes!;
     _quizzesLength = _quizzes.length;
-    _duration = 10;
+    _duration = 2;
     _controller = CountDownController();
+    _buttonOff = false;
     super.initState();
   }
 
@@ -35,6 +37,9 @@ class _QuizCardState extends State<QuizCard> {
         if (_controller.isPaused && state.currentQuizIndex > _index) {
           _controller.reset();
           _controller.start();
+          setState(() {
+            _buttonOff = false;
+          });
         }
       },
       builder: (context, state) {
@@ -87,21 +92,48 @@ class _QuizCardState extends State<QuizCard> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                state.correctAnswers.formatNumber(),
-                                style: const TextStyle(
-                                  color: AppColors.green,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    state.correctAnswers.formatNumber(),
+                                    style: const TextStyle(
+                                      color: AppColors.green,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
+                                  LinearPercentIndicator(
+                                    width: 70,
+                                    lineHeight: 8.0,
+                                    backgroundColor: AppColors.white,
+                                    progressColor: AppColors.green,
+                                    percent:
+                                        state.correctAnswers / _quizzesLength,
+                                    barRadius: const Radius.circular(8.0),
+                                  )
+                                ],
                               ),
-                              Text(
-                                state.incorrectAnswers.formatNumber(),
-                                style: const TextStyle(
-                                  color: AppColors.orange,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0,
-                                ),
+                              Row(
+                                children: [
+                                  LinearPercentIndicator(
+                                    width: 70,
+                                    lineHeight: 8.0,
+                                    isRTL: true,
+                                    backgroundColor: AppColors.white,
+                                    progressColor: AppColors.orange,
+                                    percent:
+                                        state.incorrectAnswers / _quizzesLength,
+                                    barRadius: const Radius.circular(8.0),
+                                  ),
+                                  Text(
+                                    state.incorrectAnswers.formatNumber(),
+                                    style: const TextStyle(
+                                      color: AppColors.orange,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -110,9 +142,10 @@ class _QuizCardState extends State<QuizCard> {
                             child: Text(
                               'Question ${state.currentQuizIndex + 1}/$_quizzesLength',
                               style: const TextStyle(
-                                  color: AppColors.lightPurple,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16.0),
+                                color: AppColors.lightPurple,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16.0,
+                              ),
                             ),
                           ),
                           const Spacer(),
@@ -172,6 +205,7 @@ class _QuizCardState extends State<QuizCard> {
                 bottom: 0,
                 child: Buttons(
                   quiz: _quizzes[_index],
+                  buttonOff: _buttonOff,
                   selectedAnswer: _selectedAnswer,
                 ),
               )
@@ -190,6 +224,10 @@ class _QuizCardState extends State<QuizCard> {
     final currentIndex = scoreBloc.state.currentQuizIndex;
 
     _controller.pause();
+
+    setState(() {
+      _buttonOff = true;
+    });
 
     scoreBloc.add(
       QuizScoreEvent.increment(
@@ -219,4 +257,5 @@ class _QuizCardState extends State<QuizCard> {
   late final int _duration;
   late final CountDownController _controller;
   late int _index;
+  late bool _buttonOff;
 }

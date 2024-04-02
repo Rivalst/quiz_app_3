@@ -4,16 +4,18 @@ import 'package:quiz_app_3/src/features/app/model/quiz_model/quiz_model.dart';
 
 class Buttons extends StatefulWidget {
   final Quiz quiz;
+  final bool buttonOff;
+
   final Function({
     required int score,
     required bool isCorrect,
   }) selectedAnswer;
 
-  const Buttons({
-    super.key,
-    required this.quiz,
-    required this.selectedAnswer,
-  });
+  const Buttons(
+      {super.key,
+      required this.quiz,
+      required this.selectedAnswer,
+      required this.buttonOff});
 
   @override
   State<Buttons> createState() => _ButtonsState();
@@ -46,7 +48,7 @@ class _ButtonsState extends State<Buttons> {
               score: e.score,
               answered: _answered,
               isSelected: e.text == _selectedAnswer,
-              onPressed: _selectedAnswer == null
+              onPressed: !widget.buttonOff
                   ? () {
                       final isCorrect = e.score > 0;
 
@@ -70,7 +72,7 @@ class _ButtonsState extends State<Buttons> {
   }
 }
 
-class _AnswerButton extends StatelessWidget {
+class _AnswerButton extends StatefulWidget {
   final String answer;
   final VoidCallback onPressed;
   final bool isSelected;
@@ -86,33 +88,43 @@ class _AnswerButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    IconData? icon;
-    Color iconBackgroundColor;
-    Color borderColor;
+  State<_AnswerButton> createState() => _AnswerButtonState();
+}
 
-    if (isSelected) {
-      if (answered && score <= 0) {
-        // Если кнопка выбрана и ответ дан, и score <= 0, показываем иконку Icons.close
-        icon = Icons.close;
-        iconBackgroundColor = AppColors.red;
-        borderColor = Colors.transparent;
-      } else if (answered && score > 0) {
-        // Если кнопка выбрана и ответ дан, и score > 0, показываем иконку Icons.done
-        icon = Icons.done;
-        iconBackgroundColor = AppColors.purple;
-        borderColor = Colors.transparent;
-      } else {
-        // Иначе (кнопка выбрана, но ответ еще не дан), не показываем иконку
+class _AnswerButtonState extends State<_AnswerButton> {
+  late IconData? icon;
+  late Color iconBackgroundColor;
+  late Color borderColor;
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.answered) {
+      if (widget.isSelected && widget.score > 0) {
+        setState(() {
+          icon = Icons.done;
+          iconBackgroundColor = AppColors.purple;
+          borderColor = Colors.transparent;
+        });
+      } else if (widget.isSelected && widget.score == 0) {
+        setState(() {
+          icon = Icons.close;
+          iconBackgroundColor = AppColors.red;
+          borderColor = Colors.transparent;
+        });
+      }
+      if (!widget.isSelected && widget.score > 0) {
+        setState(() {
+          icon = Icons.done;
+          iconBackgroundColor = AppColors.purple;
+          borderColor = Colors.transparent;
+        });
+      }
+    } else {
+      setState(() {
         icon = null;
         iconBackgroundColor = Colors.transparent;
         borderColor = Colors.grey;
-      }
-    } else {
-      // Если кнопка не выбрана, не показываем иконку
-      icon = null;
-      iconBackgroundColor = Colors.transparent;
-      borderColor = Colors.grey;
+      });
     }
 
     return Padding(
@@ -121,7 +133,7 @@ class _AnswerButton extends StatelessWidget {
         width: double.infinity,
         height: 60,
         child: ElevatedButton(
-          onPressed: onPressed,
+          onPressed: widget.onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.white,
             surfaceTintColor: AppColors.white,
@@ -142,7 +154,7 @@ class _AnswerButton extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    answer,
+                    widget.answer,
                     softWrap: true,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
@@ -158,42 +170,24 @@ class _AnswerButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: iconBackgroundColor,
-                  border: Border.all(
-                    color: borderColor
-                  ),
+                  border: Border.all(color: borderColor),
                 ),
                 child: icon != null
-                    ? Icon(
-                        icon,
-                        color: Colors.white,
-                        size: 20.0,
+                    ? Center(
+                        child: Text(
+                          String.fromCharCode(icon!.codePoint),
+                          style: TextStyle(
+                            inherit: false,
+                            color: AppColors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: icon!.fontFamily,
+                            package: icon!.fontPackage,
+                          ),
+                        ),
                       )
                     : null,
               ),
-              // isSelected
-              //     ? Container(
-              //         width: 25,
-              //         height: 25,
-              //         decoration: const BoxDecoration(
-              //           shape: BoxShape.circle,
-              //           color: Colors.deepPurple,
-              //         ),
-              //         child: const Icon(
-              //           Icons.done,
-              //           color: Colors.white,
-              //           size: 20.0,
-              //         ),
-              //       )
-              //     : Container(
-              //         width: 25,
-              //         height: 25,
-              //         decoration: BoxDecoration(
-              //           shape: BoxShape.circle,
-              //           border: Border.all(
-              //             color: Colors.grey,
-              //           ),
-              //         ),
-              //       ),
             ],
           ),
         ),
